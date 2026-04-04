@@ -1,0 +1,21 @@
+services:
+  stratejist-app:
+    build: .
+    container_name: stratejist_app
+    ports:
+      - "8501:8501" 
+    networks:
+      - ana_ag
+    volumes:
+      - ./src:/app/src
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+networks:
+  ana_ag:
+    external: true
